@@ -1,12 +1,12 @@
 package com.jhmarryme.excel.duty.controller;
 
+import com.jhmarryme.excel.duty.entity.vo.DutyInfoRequestVO;
 import com.jhmarryme.excel.duty.service.DutyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -25,13 +25,22 @@ public class DutyInfoController {
     @Autowired
     private DutyInfoService dutyInfoService;
 
+    /**
+     * 初始化当年的数据, 免费api每天调用数据有限, 所有缓存至redis
+     * 最多只能获取到当年的信息, 每年底api会更新
+     * <br/>
+     * @author Jiahao Wang
+     * @date 2021/2/28 22:47
+     * @param year 年份
+     * @return void
+     */
     @GetMapping("init")
-    public void initDutyInfo(int year, HttpServletRequest request, HttpServletResponse response) {
+    public void initDutyInfo(int year) {
         dutyInfoService.initYears(year);
     }
 
     @GetMapping("get")
-    public void dutyInfo(int year, HttpServletRequest request, HttpServletResponse response) {
+    public void dutyInfo(int year) {
         dutyInfoService.getYearsData(year);
     }
 
@@ -52,7 +61,7 @@ public class DutyInfoController {
 
         DutyInfoRequestVO requestVO =
                 DutyInfoRequestVO.builder().startDate(LocalDate.of(2021, 1, 3)).endDate(LocalDate.of(2021, 12, 31)).build();
-        dutyInfoService.createCoderExcelList(requestVO, response);
+        dutyInfoService.printCoderExcelList(requestVO, response);
     }
 
 }

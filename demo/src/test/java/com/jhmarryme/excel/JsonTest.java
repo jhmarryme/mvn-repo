@@ -1,11 +1,12 @@
 package com.jhmarryme.excel;
 
+import com.google.gson.reflect.TypeToken;
 import com.jhmarryme.excel.duty.entity.News;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JsonTest {
@@ -657,14 +658,15 @@ public class JsonTest {
 
         Gson gson = new Gson();
 
-        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
-        JsonArray jsonArray = jsonObject.get("newslist").getAsJsonArray();
-        List<News> list = gson.fromJson(jsonArray.toString(), List.class);
+//        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+//        JsonArray jsonArray = jsonObject.get("newslist").getAsJsonArray();
+//        String str = jsonArray.toString();
+//        List<News> list = gson.fromJson(jsonArray.toString(), new TypeToken<List<News>>() {}.getType());
 
-        List<News> news = JSONObject.parseArray(jsonArray.toString(), News.class);
+//        List<News> news = JSONObject.parseArray(jsonArray.toString(), News.class);
 
 
-        System.out.println();
+//        System.out.println(list);
     }
 
 
