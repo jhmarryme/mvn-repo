@@ -175,17 +175,21 @@ public class DutyInfoService {
      * @date 2021/2/28 22:53
      * @param year 年份
      */
-    public void getYearsData(int year) {
+    public List<News> getYearsData(int year) {
+        List<News> newsList = new ArrayList<>();
         LocalDate startDate = LocalDate.of(year, 1, 1);
         // 将结束日期指向当年的最后一天
         LocalDate endDate = startDate.with(TemporalAdjusters.firstDayOfNextYear());
         while (startDate.isBefore(endDate)) {
-            String date = startDate.getYear() + "-" + startDate.getMonth().getValue();
+            String date = startDate.getYear() + "-" + (startDate.getMonth().getValue() < 10 ? "0" + startDate.getMonth().getValue(): startDate.getMonth().getValue());
             List<News> hget = (List<News>) redisUtil.hget(String.valueOf(year), date);
 
-            log.info("{}的信息为:\n{}", year + "-" + startDate.getMonth(), hget);
+            newsList.addAll(hget);
+            log.info("{}的信息为:\n{}", year + "-" + startDate.getMonth().getValue(), hget);
             startDate = startDate.with(TemporalAdjusters.firstDayOfNextMonth());
         }
+
+        return newsList;
     }
 
     /**

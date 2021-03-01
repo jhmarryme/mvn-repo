@@ -1,5 +1,6 @@
 package com.jhmarryme.demo.web.controller.excel;
 
+import com.jhmarryme.demo.pojo.model.excel.News;
 import com.jhmarryme.demo.pojo.vo.excel.DutyInfoRequestVO;
 import com.jhmarryme.demo.web.service.excel.DutyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * description: 
@@ -49,8 +51,8 @@ public class DutyInfoController {
      * @throws
      */
     @GetMapping("get")
-    public void dutyInfo(int year) {
-        dutyInfoService.getYearsData(year);
+    public List<News> getDutyInfo(int year) {
+        return dutyInfoService.getYearsData(year);
     }
 
     /**

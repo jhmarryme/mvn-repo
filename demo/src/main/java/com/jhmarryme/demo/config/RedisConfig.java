@@ -18,7 +18,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 /**
+ * redis 配置
  *
+ * https://developer.ibm.com/zh/languages/spring/articles/know-redis-and-use-it-in-springboot-projects/
  * @author JiaHao Wang
  * @date 2021/3/1 10:53
  */
