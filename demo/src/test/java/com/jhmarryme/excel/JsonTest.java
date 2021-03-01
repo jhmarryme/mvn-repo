@@ -1,13 +1,9 @@
 package com.jhmarryme.excel;
 
-import com.google.gson.reflect.TypeToken;
-import com.jhmarryme.excel.duty.entity.News;
 import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JsonTest {
 

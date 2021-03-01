@@ -1,4 +1,4 @@
-package com.jhmarryme.excel.duty.entity;
+package com.jhmarryme.demo.pojo.model.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;

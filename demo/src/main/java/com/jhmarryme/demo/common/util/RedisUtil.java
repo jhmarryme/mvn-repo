@@ -1,4 +1,4 @@
-package com.jhmarryme.excel.duty.util;
+package com.jhmarryme.demo.common.util;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,6 @@ public final class RedisUtil {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-
 
     public Set<String> keys(String keys){
         try {

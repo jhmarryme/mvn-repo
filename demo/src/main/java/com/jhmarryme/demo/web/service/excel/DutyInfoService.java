@@ -1,19 +1,17 @@
-package com.jhmarryme.excel.duty.service;
+package com.jhmarryme.demo.web.service.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.jhmarryme.excel.duty.entity.Coder;
-import com.jhmarryme.excel.duty.entity.CoderExcel;
-import com.jhmarryme.excel.duty.entity.News;
-import com.jhmarryme.excel.duty.entity.vo.DutyInfoRequestVO;
-import com.jhmarryme.excel.duty.util.RedisUtil;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.jhmarryme.demo.pojo.model.excel.Coder;
+import com.jhmarryme.demo.pojo.model.excel.CoderExcel;
+import com.jhmarryme.demo.pojo.model.excel.News;
+import com.jhmarryme.demo.common.util.RedisUtil;
+import com.jhmarryme.demo.pojo.vo.excel.DutyInfoRequestVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,19 +111,13 @@ public class DutyInfoService {
         String item = date.getYear() + "-" + (currentMonth < 10 ? "0" + currentMonth : currentMonth);
 
         // 获取redis数据
-//        List<News> newsList = (List<News>) redisUtil.hget(String.valueOf(date.getYear()), item);
-
-        JSONArray hget = (JSONArray) redisUtil.hget(String.valueOf(date.getYear()), item);
-
-        List<News> newsList = JSONObject.parseArray(hget.toString(), News.class);
-
+        List<News> newsList = (List<News>) redisUtil.hget(String.valueOf(date.getYear()), item);
+        // 统计当月的所有日期信息
         while (startDate.getMonth().getValue() == currentMonth) {
-            // 处理节假日
-            DayOfWeek dayOfWeek = startDate.getDayOfWeek();
             News news = getCurrentPerDateInfo(startDate, newsList).orElseThrow();
+            // 只安排工作日
             if (news.getIsnotwork() == 0) {
-                coderExcelList.add(CoderExcel
-                        .builder()
+                coderExcelList.add(CoderExcel.builder()
                         .date(Date.from(startDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
                         .name(coderList.get(index).getName())
                         .whatDay(news.getCnweekday())
@@ -138,26 +130,37 @@ public class DutyInfoService {
             }
             startDate = startDate.plusDays(1);
         }
-
+        // 按月 输出到sheet页中
         WriteSheet writeSheet = EasyExcel.writerSheet(sheetNo, currentMonth + "月").head(CoderExcel.class).build();
         excelWriter.write(coderExcelList, writeSheet);
-
         return index;
     }
 
+    /**
+     * 初始化当年的数据, 免费api每天调用数据有限, 所有缓存至redis
+     * 最多只能获取到当年的信息, 每年底api会更新
+     * <br/>
+     * @author Jiahao Wang
+     * @date 2021/3/1 12:34
+     * @param year 年份
+     */
     public void initYears(int year) {
         String httpUrl = "http://api.tianapi.com/txapi/jiejiari/index";
 
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = startDate.with(TemporalAdjusters.firstDayOfNextYear());
 
+        // 按月查询
         while (startDate.isBefore(endDate)) {
             // 需要补零
-            String date = startDate.getYear() + "-" + (startDate.getMonth().getValue() < 10 ? "0" + startDate.getMonth().getValue() : startDate.getMonth().getValue());
+            String date = startDate.getYear() + "-" + (startDate.getMonth().getValue() < 10 ?
+                    "0" + startDate.getMonth().getValue() : startDate.getMonth().getValue());
             String httpArg = "key=1c5835b88ebba7b674891d603c69e72f&date=" + date + "&type=2";
             String jsonResult = request(httpUrl, httpArg);
 
             List<News> news = handleJsonResult(jsonResult);
+
+            // 按月 将信息存入redis
             redisUtil.hset(String.valueOf(year), date, news);
             startDate = startDate.with(TemporalAdjusters.firstDayOfNextMonth());
             log.info("{}: \n result: {}", date, jsonResult);
@@ -174,14 +177,14 @@ public class DutyInfoService {
      */
     public void getYearsData(int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
-
+        // 将结束日期指向当年的最后一天
         LocalDate endDate = startDate.with(TemporalAdjusters.firstDayOfNextYear());
         while (startDate.isBefore(endDate)) {
             String date = startDate.getYear() + "-" + startDate.getMonth().getValue();
             List<News> hget = (List<News>) redisUtil.hget(String.valueOf(year), date);
 
+            log.info("{}的信息为:\n{}", year + "-" + startDate.getMonth(), hget);
             startDate = startDate.with(TemporalAdjusters.firstDayOfNextMonth());
-            System.out.println("hget = " + hget);
         }
     }
 
@@ -191,21 +194,26 @@ public class DutyInfoService {
      * @author Jiahao Wang
      * @date 2021/2/28 22:53
      * @param jsonResult api返回的结果
-     * @return java.util.List<com.jhmarryme.excel.duty.entity.News>
+     * @return java.util.List<com.jhmarryme.demo.pojo.test.News>
      */
     private List<News> handleJsonResult(String jsonResult) {
-        Gson gson = new Gson();
+        // newslist中的vacation/remark 字段为空时, 值为"", 非[]
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                //过滤指定的字段名
+                return f.getName().contains("vacation") || f.getName().contains("remark");
+            }
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+        }).create();
         JsonObject jsonObject = JsonParser.parseString(jsonResult).getAsJsonObject();
         JsonArray jsonArray = jsonObject.get("newslist").getAsJsonArray();
-        // newslist中的vacation字段为空时, 值为"", 非[], 所以用typeToken解析会报错
-//        List<News> news = gson.fromJson(jsonArray.toString(), List.class);
-
-        List<News> news = JSONObject.parseArray(jsonArray.toString(), News.class);
-        return news;
-
+        return gson.fromJson(jsonArray.toString(), new TypeToken<List<News>>() {}.getType());
     }
 
-    
     /**
      * 根据时间从月度信息中 取出当日的信息
      * <br/>
@@ -213,7 +221,7 @@ public class DutyInfoService {
      * @date 2021/2/28 22:51
      * @param localDate 日期
      * @param list 月度信息
-     * @return java.util.Optional<com.jhmarryme.excel.duty.entity.News>
+     * @return java.util.Optional<com.jhmarryme.demo.pojo.test.News>
      */
     public Optional<News> getCurrentPerDateInfo(LocalDate localDate, List<News> list) {
         return list.stream().filter(news -> news.getDate().equals(localDate.toString())).findFirst();

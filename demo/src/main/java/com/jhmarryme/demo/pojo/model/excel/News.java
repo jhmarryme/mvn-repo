@@ -1,4 +1,4 @@
-package com.jhmarryme.excel.duty.entity;
+package com.jhmarryme.demo.pojo.model.excel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * description: 
+ * description: 节假日api所返回的 当日信息
  * @author: JiaHao Wang
  * @date: 1/3/21 10:22 AM
  * @modified By:
@@ -35,7 +35,7 @@ public class News implements Serializable {
     private String enname;
     private Integer isnotwork;
     private List<String> vacation;
-    private String remark;
+    private List<String> remark;
     private String tip;
     private String rest;
 

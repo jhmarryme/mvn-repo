@@ -1,7 +1,7 @@
-package com.jhmarryme.excel.duty.controller;
+package com.jhmarryme.demo.web.controller.excel;
 
-import com.jhmarryme.excel.duty.entity.vo.DutyInfoRequestVO;
-import com.jhmarryme.excel.duty.service.DutyInfoService;
+import com.jhmarryme.demo.pojo.vo.excel.DutyInfoRequestVO;
+import com.jhmarryme.demo.web.service.excel.DutyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.time.LocalDate;
  * @modified By:
  */
 @RestController
-@RequestMapping("dutyInfo")
+@RequestMapping("duty")
 public class DutyInfoController {
 
     @Autowired
@@ -39,6 +39,15 @@ public class DutyInfoController {
         dutyInfoService.initYears(year);
     }
 
+    /**
+     * 获取当年的信息
+     * <br/>
+     * @author Jiahao Wang
+     * @date 2021/3/1 12:34
+     * @param year
+     * @return void
+     * @throws
+     */
     @GetMapping("get")
     public void dutyInfo(int year) {
         dutyInfoService.getYearsData(year);
