@@ -2,6 +2,8 @@ package com.jhmarryme.demo.web.service.system.log;
 
 import com.jhmarryme.demo.mapper.system.log.ExceptionLogMapper;
 import com.jhmarryme.demo.pojo.model.system.log.ExceptionLog;
+import com.jhmarryme.demo.pojo.model.system.log.OperationLog;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,11 @@ public class ExceptionLogService {
 
     public int insertDemo() {
         ExceptionLog exceptionLog = new ExceptionLog();
-        exceptionLog.setExcId("1111");
+        exceptionLog.setExcId(RandomStringUtils.randomAlphanumeric(5));
         return exceptionLogMapper.insert(exceptionLog);
+    }
+
+    public void insertOne(ExceptionLog exceptionLog) {
+        exceptionLogMapper.insert(exceptionLog);
     }
 }
