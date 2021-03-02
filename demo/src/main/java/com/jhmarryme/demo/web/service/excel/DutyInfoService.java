@@ -89,7 +89,7 @@ public class DutyInfoService {
 
     /**
      * 根据参数, 将当月的排班信息输出到excel sheet页中
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/2/28 22:56
      * @param excelWriter excel流
@@ -137,7 +137,7 @@ public class DutyInfoService {
     /**
      * 初始化当年的数据, 免费api每天调用数据有限, 所有缓存至redis
      * 最多只能获取到当年的信息, 每年底api会更新
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/3/1 12:34
      * @param year 年份
@@ -168,7 +168,7 @@ public class DutyInfoService {
 
     /**
      * 根据年份 返回当年的的日期信息
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/2/28 22:53
      * @param year 年份
@@ -192,7 +192,7 @@ public class DutyInfoService {
 
     /**
      * 解析月度的信息
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/2/28 22:53
      * @param jsonResult api返回的结果
@@ -218,7 +218,7 @@ public class DutyInfoService {
 
     /**
      * 根据时间从月度信息中 取出当日的信息
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/2/28 22:51
      * @param localDate 日期

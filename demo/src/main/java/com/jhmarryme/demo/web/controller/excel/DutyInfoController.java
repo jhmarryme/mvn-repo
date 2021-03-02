@@ -30,7 +30,7 @@ public class DutyInfoController {
     /**
      * 初始化当年的数据, 免费api每天调用数据有限, 所有缓存至redis
      * 最多只能获取到当年的信息, 每年底api会更新
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/2/28 22:47
      * @param year 年份
@@ -43,7 +43,7 @@ public class DutyInfoController {
 
     /**
      * 获取当年的信息
-     * <br/>
+     *
      * @author Jiahao Wang
      * @date 2021/3/1 12:34
      * @param year
