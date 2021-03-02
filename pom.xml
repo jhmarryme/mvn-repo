@@ -11,6 +11,7 @@
     <modules>
         <module>common</module>
         <module>demo</module>
+        <module>mybatis-generator</module>
     </modules>
 
     <properties>
@@ -23,6 +24,7 @@
         <commons-codec.version>1.15</commons-codec.version>
         <commons-io.version>2.8.0</commons-io.version>
         <easyexcel.version>2.2.6</easyexcel.version>
+        <tk.mybatis.mapper.version>2.1.5</tk.mybatis.mapper.version>
     </properties>
 
     <parent>

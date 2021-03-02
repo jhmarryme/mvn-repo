@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jhmarryme.demo.mapper.system.log.ExceptionLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jhmarryme.demo.pojo.model.system.log.ExceptionLog" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="exc_id" property="excId" jdbcType="VARCHAR" />
+    <result column="exc_name" property="excName" jdbcType="VARCHAR" />
+    <result column="oper_user_id" property="operUserId" jdbcType="VARCHAR" />
+    <result column="oper_username" property="operUsername" jdbcType="VARCHAR" />
+    <result column="oper_uri" property="operUri" jdbcType="VARCHAR" />
+    <result column="oper_ip" property="operIp" jdbcType="VARCHAR" />
+    <result column="oper_create_time" property="operCreateTime" jdbcType="TIMESTAMP" />
+    <result column="oper_ver" property="operVer" jdbcType="VARCHAR" />
+    <result column="oper_method" property="operMethod" jdbcType="VARCHAR" />
+    <result column="exc_msg" property="excMsg" jdbcType="LONGVARCHAR" />
+    <result column="exc_req_param" property="excReqParam" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

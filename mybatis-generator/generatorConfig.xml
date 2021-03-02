@@ -10,7 +10,7 @@
 
         <!-- 通用mapper所在目录 -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.jhmarryme.my.mapper.MyMapper"/>
+            <property name="mappers" value="com.jhmarryme.demo.common.mybatis.BaseMapper"/>
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
@@ -20,13 +20,13 @@
         </jdbcConnection>
 
         <!-- 对应生成的pojo所在包 -->
-        <javaModelGenerator targetPackage="com.jhmarryme.demo.pojo.model.system.log" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.jhmarryme.demo.pojo.model.system.log" targetProject="mybatis-generator/src/main/java"/>
 
 		<!-- 对应生成的mapper所在目录 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="mybatis-generator/src/main/resources"/>
 
 		<!-- 配置mapper对应的java映射 -->
-        <javaClientGenerator targetPackage="com.jhmarryme.demo.dao.system.log" targetProject="src/main/java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.jhmarryme.demo.mapper.system.log" targetProject="mybatis-generator/src/main/java" type="XMLMAPPER"/>
 
         <!-- 数据库表 -->
 		<table tableName="exception_log"></table>
