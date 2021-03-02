@@ -5,18 +5,20 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="oper_id" property="operId" jdbcType="VARCHAR" />
-    <result column="oper_module" property="operModule" jdbcType="VARCHAR" />
-    <result column="oper_type" property="operType" jdbcType="VARCHAR" />
-    <result column="oper_desc" property="operDesc" jdbcType="VARCHAR" />
-    <result column="oper_user_id" property="operUserId" jdbcType="VARCHAR" />
-    <result column="oper_username" property="operUsername" jdbcType="VARCHAR" />
-    <result column="oper_method" property="operMethod" jdbcType="VARCHAR" />
-    <result column="oper_uri" property="operUri" jdbcType="VARCHAR" />
-    <result column="oper_ip" property="operIp" jdbcType="VARCHAR" />
-    <result column="oper_create_time" property="operCreateTime" jdbcType="TIMESTAMP" />
-    <result column="oper_ver" property="operVer" jdbcType="VARCHAR" />
-    <result column="oper_req_param" property="operReqParam" jdbcType="LONGVARCHAR" />
-    <result column="oper_res_param" property="operResParam" jdbcType="LONGVARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ver" property="ver" jdbcType="VARCHAR" />
+    <result column="req_type" property="reqType" jdbcType="VARCHAR" />
+    <result column="req_param" property="reqParam" jdbcType="LONGVARCHAR" />
+    <result column="res_param" property="resParam" jdbcType="LONGVARCHAR" />
+    <result column="req_body" property="reqBody" jdbcType="LONGVARCHAR" />
   </resultMap>
 </mapper>

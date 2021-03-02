@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("system/log")
 public class SystemLogAspectTestController {
 
-    @RequestMapping(path = "operation", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(path = "postJson", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     @OperLog(operModule = "测试日志记录模块", operType = "测试type", operDesc = "测试Desc")
-    public String operationLog(@RequestBody ExceptionLog exceptionLog, String param) {
-        if (exceptionLog.getExcId() == null) {
+    public String postJson(@RequestBody ExceptionLog exceptionLog, @RequestParam String param) {
+        if (exceptionLog.getId() == null) {
             throw new RuntimeException("test");
         }
         return "success";

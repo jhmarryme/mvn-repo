@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.jhmarryme.demo.my;
+package com.jhmarryme.demo.common.mybatis;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;

@@ -20,7 +20,7 @@ public class ExceptionLogService {
 
     public int insertDemo() {
         ExceptionLog exceptionLog = new ExceptionLog();
-        exceptionLog.setExcId(RandomStringUtils.randomAlphanumeric(5));
+        exceptionLog.setId(RandomStringUtils.randomAlphanumeric(5));
         return exceptionLogMapper.insert(exceptionLog);
     }
 

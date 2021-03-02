@@ -9,312 +9,351 @@ public class OperationLog {
      * 主键
      */
     @Id
-    @Column(name = "oper_id")
-    private String operId;
+    private String id;
 
     /**
      * 操作模块
      */
-    @Column(name = "oper_module")
-    private String operModule;
+    private String module;
 
     /**
      * 操作类型
      */
-    @Column(name = "oper_type")
-    private String operType;
+    private String type;
 
     /**
      * 操作描述
      */
-    @Column(name = "oper_desc")
-    private String operDesc;
+    private String desc;
 
     /**
      * 用户id
      */
-    @Column(name = "oper_user_id")
-    private String operUserId;
+    @Column(name = "user_id")
+    private String userId;
 
     /**
      * 用户名
      */
-    @Column(name = "oper_username")
-    private String operUsername;
+    private String username;
 
     /**
      * 操作方法
      */
-    @Column(name = "oper_method")
-    private String operMethod;
+    private String method;
 
     /**
      * 请求uri
      */
-    @Column(name = "oper_uri")
-    private String operUri;
+    private String uri;
 
     /**
      * 请求ip
      */
-    @Column(name = "oper_ip")
-    private String operIp;
+    private String ip;
 
     /**
      * 操作时间
      */
-    @Column(name = "oper_create_time")
-    private Date operCreateTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * 操作版本号
      */
-    @Column(name = "oper_ver")
-    private String operVer;
+    private String ver;
+
+    /**
+     * 请求类型
+     */
+    @Column(name = "req_type")
+    private String reqType;
 
     /**
      * 请求参数
      */
-    @Column(name = "oper_req_param")
-    private String operReqParam;
+    @Column(name = "req_param")
+    private String reqParam;
 
     /**
      * 返回参数
      */
-    @Column(name = "oper_res_param")
-    private String operResParam;
+    @Column(name = "res_param")
+    private String resParam;
+
+    /**
+     * 请求体
+     */
+    @Column(name = "req_body")
+    private String reqBody;
 
     /**
      * 获取主键
      *
-     * @return oper_id - 主键
+     * @return id - 主键
      */
-    public String getOperId() {
-        return operId;
+    public String getId() {
+        return id;
     }
 
     /**
      * 设置主键
      *
-     * @param operId 主键
+     * @param id 主键
      */
-    public void setOperId(String operId) {
-        this.operId = operId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
      * 获取操作模块
      *
-     * @return oper_module - 操作模块
+     * @return module - 操作模块
      */
-    public String getOperModule() {
-        return operModule;
+    public String getModule() {
+        return module;
     }
 
     /**
      * 设置操作模块
      *
-     * @param operModule 操作模块
+     * @param module 操作模块
      */
-    public void setOperModule(String operModule) {
-        this.operModule = operModule;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     /**
      * 获取操作类型
      *
-     * @return oper_type - 操作类型
+     * @return type - 操作类型
      */
-    public String getOperType() {
-        return operType;
+    public String getType() {
+        return type;
     }
 
     /**
      * 设置操作类型
      *
-     * @param operType 操作类型
+     * @param type 操作类型
      */
-    public void setOperType(String operType) {
-        this.operType = operType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
      * 获取操作描述
      *
-     * @return oper_desc - 操作描述
+     * @return desc - 操作描述
      */
-    public String getOperDesc() {
-        return operDesc;
+    public String getDesc() {
+        return desc;
     }
 
     /**
      * 设置操作描述
      *
-     * @param operDesc 操作描述
+     * @param desc 操作描述
      */
-    public void setOperDesc(String operDesc) {
-        this.operDesc = operDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     /**
      * 获取用户id
      *
-     * @return oper_user_id - 用户id
+     * @return user_id - 用户id
      */
-    public String getOperUserId() {
-        return operUserId;
+    public String getUserId() {
+        return userId;
     }
 
     /**
      * 设置用户id
      *
-     * @param operUserId 用户id
+     * @param userId 用户id
      */
-    public void setOperUserId(String operUserId) {
-        this.operUserId = operUserId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
      * 获取用户名
      *
-     * @return oper_username - 用户名
+     * @return username - 用户名
      */
-    public String getOperUsername() {
-        return operUsername;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * 设置用户名
      *
-     * @param operUsername 用户名
+     * @param username 用户名
      */
-    public void setOperUsername(String operUsername) {
-        this.operUsername = operUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
      * 获取操作方法
      *
-     * @return oper_method - 操作方法
+     * @return method - 操作方法
      */
-    public String getOperMethod() {
-        return operMethod;
+    public String getMethod() {
+        return method;
     }
 
     /**
      * 设置操作方法
      *
-     * @param operMethod 操作方法
+     * @param method 操作方法
      */
-    public void setOperMethod(String operMethod) {
-        this.operMethod = operMethod;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     /**
      * 获取请求uri
      *
-     * @return oper_uri - 请求uri
+     * @return uri - 请求uri
      */
-    public String getOperUri() {
-        return operUri;
+    public String getUri() {
+        return uri;
     }
 
     /**
      * 设置请求uri
      *
-     * @param operUri 请求uri
+     * @param uri 请求uri
      */
-    public void setOperUri(String operUri) {
-        this.operUri = operUri;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     /**
      * 获取请求ip
      *
-     * @return oper_ip - 请求ip
+     * @return ip - 请求ip
      */
-    public String getOperIp() {
-        return operIp;
+    public String getIp() {
+        return ip;
     }
 
     /**
      * 设置请求ip
      *
-     * @param operIp 请求ip
+     * @param ip 请求ip
      */
-    public void setOperIp(String operIp) {
-        this.operIp = operIp;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     /**
      * 获取操作时间
      *
-     * @return oper_create_time - 操作时间
+     * @return create_time - 操作时间
      */
-    public Date getOperCreateTime() {
-        return operCreateTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
      * 设置操作时间
      *
-     * @param operCreateTime 操作时间
+     * @param createTime 操作时间
      */
-    public void setOperCreateTime(Date operCreateTime) {
-        this.operCreateTime = operCreateTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * 获取操作版本号
      *
-     * @return oper_ver - 操作版本号
+     * @return ver - 操作版本号
      */
-    public String getOperVer() {
-        return operVer;
+    public String getVer() {
+        return ver;
     }
 
     /**
      * 设置操作版本号
      *
-     * @param operVer 操作版本号
+     * @param ver 操作版本号
      */
-    public void setOperVer(String operVer) {
-        this.operVer = operVer;
+    public void setVer(String ver) {
+        this.ver = ver;
+    }
+
+    /**
+     * 获取请求类型
+     *
+     * @return req_type - 请求类型
+     */
+    public String getReqType() {
+        return reqType;
+    }
+
+    /**
+     * 设置请求类型
+     *
+     * @param reqType 请求类型
+     */
+    public void setReqType(String reqType) {
+        this.reqType = reqType;
     }
 
     /**
      * 获取请求参数
      *
-     * @return oper_req_param - 请求参数
+     * @return req_param - 请求参数
      */
-    public String getOperReqParam() {
-        return operReqParam;
+    public String getReqParam() {
+        return reqParam;
     }
 
     /**
      * 设置请求参数
      *
-     * @param operReqParam 请求参数
+     * @param reqParam 请求参数
      */
-    public void setOperReqParam(String operReqParam) {
-        this.operReqParam = operReqParam;
+    public void setReqParam(String reqParam) {
+        this.reqParam = reqParam;
     }
 
     /**
      * 获取返回参数
      *
-     * @return oper_res_param - 返回参数
+     * @return res_param - 返回参数
      */
-    public String getOperResParam() {
-        return operResParam;
+    public String getResParam() {
+        return resParam;
     }
 
     /**
      * 设置返回参数
      *
-     * @param operResParam 返回参数
+     * @param resParam 返回参数
      */
-    public void setOperResParam(String operResParam) {
-        this.operResParam = operResParam;
+    public void setResParam(String resParam) {
+        this.resParam = resParam;
+    }
+
+    /**
+     * 获取请求体
+     *
+     * @return req_body - 请求体
+     */
+    public String getReqBody() {
+        return reqBody;
+    }
+
+    /**
+     * 设置请求体
+     *
+     * @param reqBody 请求体
+     */
+    public void setReqBody(String reqBody) {
+        this.reqBody = reqBody;
     }
 }

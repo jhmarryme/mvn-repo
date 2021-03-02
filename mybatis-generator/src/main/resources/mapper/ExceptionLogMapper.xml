@@ -5,16 +5,18 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="exc_id" property="excId" jdbcType="VARCHAR" />
-    <result column="exc_name" property="excName" jdbcType="VARCHAR" />
-    <result column="oper_user_id" property="operUserId" jdbcType="VARCHAR" />
-    <result column="oper_username" property="operUsername" jdbcType="VARCHAR" />
-    <result column="oper_uri" property="operUri" jdbcType="VARCHAR" />
-    <result column="oper_ip" property="operIp" jdbcType="VARCHAR" />
-    <result column="oper_create_time" property="operCreateTime" jdbcType="TIMESTAMP" />
-    <result column="oper_ver" property="operVer" jdbcType="VARCHAR" />
-    <result column="oper_method" property="operMethod" jdbcType="VARCHAR" />
-    <result column="exc_msg" property="excMsg" jdbcType="LONGVARCHAR" />
-    <result column="exc_req_param" property="excReqParam" jdbcType="LONGVARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ver" property="ver" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="req_type" property="reqType" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="LONGVARCHAR" />
+    <result column="req_param" property="reqParam" jdbcType="LONGVARCHAR" />
+    <result column="req_body" property="reqBody" jdbcType="LONGVARCHAR" />
   </resultMap>
 </mapper>
