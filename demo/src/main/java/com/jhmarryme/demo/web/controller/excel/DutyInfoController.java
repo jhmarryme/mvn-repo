@@ -5,6 +5,7 @@ import com.jhmarryme.demo.pojo.vo.excel.DutyInfoRequestVO;
 import com.jhmarryme.demo.web.service.excel.DutyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,8 +62,8 @@ public class DutyInfoController {
      * <p>2. 设置返回的 参数
      * <p>3. 直接写，这里注意，finish的时候会自动关闭OutputStream,当然你外面再关闭流问题不大
      */
-    @GetMapping("download")
-    public void download(HttpServletResponse response) throws IOException {
+    @RequestMapping("download")
+    public void download(@RequestBody DutyInfoRequestVO requestVO, HttpServletResponse response) throws IOException {
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
@@ -70,8 +71,6 @@ public class DutyInfoController {
         String fileName = URLEncoder.encode("每日轮值", "UTF-8");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
 
-        DutyInfoRequestVO requestVO =
-                DutyInfoRequestVO.builder().startDate(LocalDate.of(2021, 1, 3)).endDate(LocalDate.of(2021, 12, 31)).build();
         dutyInfoService.printCoderExcelList(requestVO, response);
     }
 

@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * description: 
  * @author: JiaHao Wang
@@ -11,12 +15,15 @@ import lombok.NoArgsConstructor;
  * @modified By:
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "coder")
 public class Coder {
+    @Id
+    private Integer id;
 
-    private int id;
+    @Column(name = "rotation_order")
+    private Integer rotationOrder;
 
-    private String name;
+    @Column(name = "real_name")
+    private String realName;
 
 }

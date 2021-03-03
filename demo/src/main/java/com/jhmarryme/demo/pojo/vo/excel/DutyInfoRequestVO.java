@@ -18,4 +18,7 @@ public class DutyInfoRequestVO {
     private LocalDate startDate;
 
     private LocalDate endDate;
+
+    private Integer startOrder;
+
 }

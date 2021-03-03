@@ -5,6 +5,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.jhmarryme.demo.mapper.excel.CoderMapper;
 import com.jhmarryme.demo.pojo.model.excel.Coder;
 import com.jhmarryme.demo.pojo.model.excel.CoderExcel;
 import com.jhmarryme.demo.pojo.model.excel.News;
@@ -40,23 +41,8 @@ public class DutyInfoService {
     @Autowired
     private RedisUtil redisUtil;
 
-    public List<Coder> getCoderInfo() {
-        ArrayList<Coder> list = new ArrayList<>();
-        list.add(new Coder(1, "徐苏北"));
-        list.add(new Coder(2, "张原茂"));
-        list.add(new Coder(3, "吴四维"));
-        list.add(new Coder(4, "王家豪"));
-        list.add(new Coder(5, "田秀华"));
-        list.add(new Coder(6, "屠琦"));
-        list.add(new Coder(7, "胡成星"));
-        list.add(new Coder(8, "陈俊安"));
-        list.add(new Coder(9, "谢希豪"));
-        list.add(new Coder(10, "刘俊杰"));
-        list.add(new Coder(11, "雷清英"));
-        list.add(new Coder(12, "程鑫凯"));
-
-        return list;
-    }
+    @Autowired
+    private CoderMapper coderMapper;
 
     public void printCoderExcelList(DutyInfoRequestVO requestVO, HttpServletResponse response) throws IOException {
         // 方法3 如果写到不同的sheet 不同的对象
@@ -72,7 +58,7 @@ public class DutyInfoService {
             // 这里 指定文件
             excelWriter = EasyExcel.write(response.getOutputStream(), CoderExcel.class).build();
 
-            int index = 0;
+            int index = requestVO.getStartOrder() != null ? requestVO.getStartOrder() - 1 : 0;
             int sheetNo = 0;
             while (startDate.isBefore(endDate)) {
                 index = printCoderExcelByMonth(excelWriter, sheetNo, startDate, index);
@@ -103,7 +89,12 @@ public class DutyInfoService {
         LocalDate startDate = date;
         int currentMonth = startDate.getMonth().getValue();
 
-        List<Coder> coderList = getCoderInfo();
+        Coder coder = coderMapper.selectByPrimaryKey(1);
+
+        List<Coder> coderList = coderMapper.selectAll();
+        // 排序
+        coderList.sort(Comparator.comparing(Coder::getRotationOrder));
+
         List<CoderExcel> coderExcelList = new ArrayList<>();
 
         String item = date.getYear() + "-" + (currentMonth < 10 ? "0" + currentMonth : currentMonth);
@@ -117,7 +108,7 @@ public class DutyInfoService {
             if (news.getIsnotwork() == 0) {
                 coderExcelList.add(CoderExcel.builder()
                         .date(Date.from(startDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
-                        .name(coderList.get(index).getName())
+                        .name(coderList.get(index).getRealName())
                         .whatDay(news.getCnweekday())
                         .remark(news.getTip())
                         .build()
