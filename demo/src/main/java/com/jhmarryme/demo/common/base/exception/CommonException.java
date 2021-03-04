@@ -9,7 +9,7 @@ import lombok.Data;
  * @date 2021/3/3 11:03
  */
 @Data
-public class GenericException extends RuntimeException {
+public class CommonException extends RuntimeException {
 
     private static final long serialVersionUID = 0L;
 
@@ -28,11 +28,15 @@ public class GenericException extends RuntimeException {
      */
     private Object data;
 
-    public GenericException(ResultStatus resultStatus) {
+    public CommonException() {
+        this(null, null);
+    }
+
+    public CommonException(ResultStatus resultStatus) {
         this(resultStatus, null);
     }
 
-    public GenericException(ResultStatus resultStatus, Object data) {
+    public CommonException(ResultStatus resultStatus, Object data) {
         if (resultStatus == null) {
             resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
         }
@@ -40,7 +44,7 @@ public class GenericException extends RuntimeException {
         this.data = data;
     }
 
-    public GenericException(ResultStatus resultStatus, Object data, String... params) {
+    public CommonException(ResultStatus resultStatus, Object data, String... params) {
         this(resultStatus, data);
         this.params = params;
     }

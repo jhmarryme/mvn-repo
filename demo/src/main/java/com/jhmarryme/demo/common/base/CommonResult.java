@@ -21,8 +21,8 @@ public class CommonResult<T> {
     private T data;
 
     private CommonResult(ResultStatus resultStatus, T data) {
-        this.code = resultStatus.getCode();
-        this.msg = resultStatus.getMsg();
+        this.code = resultStatus.getHttpStatus().value();
+        this.msg = resultStatus.name();
         this.data = data;
     }
 
