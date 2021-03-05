@@ -22,6 +22,7 @@ public enum ResultStatus {
     NO_AUTHORITY(HttpStatus.FORBIDDEN),
     /** 未知错误 */
     UNKNOWN_ERROR(HttpStatus.BAD_REQUEST),
+    TEST_ERROR(HttpStatus.BAD_REQUEST),
     ;
 
     /** 业务异常码 */

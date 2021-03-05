@@ -61,7 +61,7 @@ public class OperationLogAspect {
      * @param joinPoint 切入点
      * @param keys      返回结果
      */
-    @AfterReturning(value = "opearationLogPointCut()", returning = "keys")
+//    @AfterReturning(value = "opearationLogPointCut()", returning = "keys")
     public void saveOperLog(JoinPoint joinPoint, Object keys) {
 
         log.info("saveOperLog");

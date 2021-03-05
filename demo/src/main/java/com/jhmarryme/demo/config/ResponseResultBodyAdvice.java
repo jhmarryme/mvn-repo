@@ -6,13 +6,14 @@ import com.jhmarryme.demo.common.base.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.LocaleResolver;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -72,13 +74,26 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @ExceptionHandler(CommonException.class)
-    public Object handleGenericException(CommonException e, HttpServletRequest request) {
+    public Object handleCommonException(CommonException e, HttpServletRequest request) {
         log.error("统一异常处理(业务异常):" + e);
         Locale locale = localeResolver.resolveLocale(request);
         String message = messageSource.getMessage(e.getResultStatus().name(), e.getParams(), locale);
         CommonResult<Object> result = CommonResult.failure(e.getResultStatus(), e.getData());
         result.setMsg(message);
         return result;
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Object handleMethodArgumentNotValidException(MethodArgumentNotValidException e,
+                                                        HttpServletRequest request) {
+        log.error("参数校验异常:" + e);
+        Locale locale = localeResolver.resolveLocale(request);
+
+        List<ObjectError> errors =e.getBindingResult().getAllErrors();
+        StringBuffer errorMsg = new StringBuffer();
+        errors.forEach(x -> errorMsg.append(x.getDefaultMessage()).append(";"));
+        System.out.println(errorMsg.toString());
+        return CommonResult.failure();
     }
 
 }
