@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.groups.Default;
 
 
 /**
@@ -18,12 +19,12 @@ import javax.validation.constraints.Pattern;
 public class TestVO {
 
     @NotEmpty(message = "{demo.name.null}")
-    @NotNull(groups = {BasisGroups.UpdateGroup.class})
+    @NotNull(groups = {BasisGroups.UpdateGroup.class, Default.class})
     private String name;
 
-    @Length(min = 5, max = 25, message = "{demo.key.length}", groups = {BasisGroups.UpdateGroup.class})
+    @Length(min = 5, max = 25, message = "{demo.key.length}", groups = {BasisGroups.UpdateGroup.class, Default.class})
     private String key;
 
-    @Pattern(regexp = "[012]", message = "无效的状态标志", groups = {BasisGroups.InsertGroup.class})
+    @Pattern(regexp = "[012]", message = "无效的状态标志", groups = {BasisGroups.InsertGroup.class, Default.class})
     private String state;
 }

@@ -1,6 +1,7 @@
 package com.jhmarryme.demo.common.base.enums;
 
 
+import com.jhmarryme.demo.common.base.IResultStatus;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -10,7 +11,7 @@ import org.springframework.http.HttpStatus;
  * @date 2021/3/3 11:01
  */
 @Getter
-public enum ResultStatus {
+public enum ResultStatus implements IResultStatus {
 
     /** 成功 */
     SUCCESS(HttpStatus.OK),

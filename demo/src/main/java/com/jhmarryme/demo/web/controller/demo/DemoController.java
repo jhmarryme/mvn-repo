@@ -6,6 +6,7 @@ import com.jhmarryme.demo.common.base.BasisGroups;
 import com.jhmarryme.demo.pojo.model.system.log.OperationLog;
 import com.jhmarryme.demo.pojo.vo.TestVO;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,12 @@ import java.util.Locale;
 public class DemoController {
 
     @RequestMapping(path = "formValidate", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseResultBody
+//    @ResponseResultBody
     @OperLog(operModule = "表单校验测试", operType = "测试type", operDesc = "测试Desc")
-    public OperationLog formValidate(@RequestBody @Validated({BasisGroups.DefaultSequence.class}) TestVO vo) {
+    public OperationLog formValidate(@RequestBody @Validated TestVO vo) {
         Locale locale = LocaleContextHolder.getLocale();
 
+        Assert.notNull(locale);
         return new OperationLog();
     }
 }

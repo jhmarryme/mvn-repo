@@ -44,9 +44,21 @@ public class CommonException extends RuntimeException {
         this.data = data;
     }
 
+    public CommonException(ResultStatus resultStatus, String... params) {
+        if (resultStatus == null) {
+            resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
+        }
+        this.resultStatus = resultStatus;
+        this.data = data;
+    }
+
     public CommonException(ResultStatus resultStatus, Object data, String... params) {
-        this(resultStatus, data);
+        if (resultStatus == null) {
+            resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
+        }
+        this.resultStatus = resultStatus;
         this.params = params;
+        this.data = data;
     }
 
 }
