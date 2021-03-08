@@ -1,7 +1,10 @@
 package com.jhmarryme.demo.common.base.exception;
 
+import com.jhmarryme.demo.common.base.IResultStatus;
 import com.jhmarryme.demo.common.base.enums.ResultStatus;
 import lombok.Data;
+
+import java.io.Serial;
 
 /**
  * 通用异常类
@@ -11,12 +14,13 @@ import lombok.Data;
 @Data
 public class CommonException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     /**
      * 错误信息
      */
-    private ResultStatus resultStatus;
+    private IResultStatus resultStatus;
 
     /**
      * 参数用来补充说明异常消息，如需提示用户在某IP处登录可以设置消息
@@ -29,36 +33,28 @@ public class CommonException extends RuntimeException {
     private Object data;
 
     public CommonException() {
-        this(null, null);
+        this(null, null, (String[]) null);
     }
 
-    public CommonException(ResultStatus resultStatus) {
-        this(resultStatus, null);
+    public CommonException(IResultStatus resultStatus) {
+        this(resultStatus, null, (String[]) null);
     }
 
-    public CommonException(ResultStatus resultStatus, Object data) {
+    public CommonException(IResultStatus resultStatus, Object data) {
+        this(resultStatus, data, (String[]) null);
+    }
+
+    public CommonException(IResultStatus resultStatus, String... params) {
+        this(resultStatus, null, params);
+    }
+
+    public CommonException(IResultStatus resultStatus, Object data, String... params) {
         if (resultStatus == null) {
             resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
         }
         this.resultStatus = resultStatus;
         this.data = data;
-    }
-
-    public CommonException(ResultStatus resultStatus, String... params) {
-        if (resultStatus == null) {
-            resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
-        }
-        this.resultStatus = resultStatus;
-        this.data = data;
-    }
-
-    public CommonException(ResultStatus resultStatus, Object data, String... params) {
-        if (resultStatus == null) {
-            resultStatus = ResultStatus.INTERNAL_SERVER_ERROR;
-        }
-        this.resultStatus = resultStatus;
         this.params = params;
-        this.data = data;
     }
 
 }

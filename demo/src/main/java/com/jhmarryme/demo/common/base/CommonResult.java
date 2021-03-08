@@ -20,9 +20,9 @@ public class CommonResult<T> {
     /** 返回参数 */
     private T data;
 
-    private CommonResult(ResultStatus resultStatus, T data) {
+    private CommonResult(IResultStatus resultStatus, T data) {
         this.code = resultStatus.getHttpStatus().value();
-        this.msg = resultStatus.name();
+        this.msg = resultStatus.getCode();
         this.data = data;
     }
 
@@ -43,7 +43,7 @@ public class CommonResult<T> {
     /**
      * 业务成功返回业务代码,描述和返回的参数
      */
-    public static <T> CommonResult<T> success(ResultStatus resultStatus, T data) {
+    public static <T> CommonResult<T> success(IResultStatus resultStatus, T data) {
         if (resultStatus == null) {
             return success(data);
         }
@@ -60,14 +60,14 @@ public class CommonResult<T> {
     /**
      * 业务异常返回业务代码,描述和返回的参数
      */
-    public static <T> CommonResult<T> failure(ResultStatus resultStatus) {
+    public static <T> CommonResult<T> failure(IResultStatus resultStatus) {
         return failure(resultStatus, null);
     }
 
     /**
      * 业务异常返回业务代码,描述和返回的参数
      */
-    public static <T> CommonResult<T> failure(ResultStatus resultStatus, T data) {
+    public static <T> CommonResult<T> failure(IResultStatus resultStatus, T data) {
         if (resultStatus == null) {
             return new CommonResult<>(ResultStatus.INTERNAL_SERVER_ERROR, null);
         }

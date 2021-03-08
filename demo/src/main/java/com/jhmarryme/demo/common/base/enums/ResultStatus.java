@@ -33,4 +33,9 @@ public enum ResultStatus implements IResultStatus {
         this.httpStatus = httpStatus;
     }
 
+
+    @Override
+    public String getCode() {
+        return this.name();
+    }
 }

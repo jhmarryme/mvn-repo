@@ -22,7 +22,7 @@ public interface Assert {
      * @param args
      * @return
      */
-    CommonException newException(Throwable t, String... args);
+    CommonException newException(Object data, String... args);
 
     /**
      * <p>断言对象<code>obj</code>非空。如果对象<code>obj</code>为空，则抛出异常

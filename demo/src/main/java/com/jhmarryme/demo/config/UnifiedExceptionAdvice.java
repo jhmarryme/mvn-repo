@@ -40,7 +40,7 @@ public class UnifiedExceptionAdvice {
     public Object handleCommonException(CommonException e, HttpServletRequest request) {
         log.error("统一异常处理(业务异常):" + e);
         Locale locale = localeResolver.resolveLocale(request);
-        String message = messageSource.getMessage(e.getResultStatus().name(), e.getParams(), locale);
+        String message = messageSource.getMessage(e.getResultStatus().getCode(), e.getParams(), locale);
         CommonResult<Object> result = CommonResult.failure(e.getResultStatus(), e.getData());
         result.setMsg(message);
         return result;

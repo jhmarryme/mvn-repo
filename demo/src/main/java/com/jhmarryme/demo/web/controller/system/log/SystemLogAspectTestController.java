@@ -26,7 +26,7 @@ public class SystemLogAspectTestController {
     public OperationLog postJson(@RequestBody ExceptionLog exceptionLog, @RequestParam String param) {
         Locale locale = LocaleContextHolder.getLocale();
         if (exceptionLog.getId() == null) {
-            throw new CommonException(ResultStatus.TEST_ERROR, null, "test");
+            throw new CommonException(ResultStatus.TEST_ERROR, new String[]{"test"});
         }
         return new OperationLog();
     }
