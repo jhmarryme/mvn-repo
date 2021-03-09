@@ -1,9 +1,7 @@
 package com.jhmarryme.demo.web.controller.system.log;
 
-import com.jhmarryme.demo.common.annotation.OperLog;
 import com.jhmarryme.demo.common.annotation.ResponseResultBody;
-import com.jhmarryme.demo.common.base.enums.ResultStatus;
-import com.jhmarryme.demo.common.base.exception.CommonException;
+import com.jhmarryme.demo.common.base.enums.ResponseEnum;
 import com.jhmarryme.demo.pojo.model.system.log.ExceptionLog;
 import com.jhmarryme.demo.pojo.model.system.log.OperationLog;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,13 +19,11 @@ import java.util.Locale;
 public class SystemLogAspectTestController {
 
     @RequestMapping(path = "postJson", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseResultBody
+//    @ResponseResultBody
 //    @OperLog(operModule = "测试日志记录模块", operType = "测试type", operDesc = "测试Desc")
     public OperationLog postJson(@RequestBody ExceptionLog exceptionLog, @RequestParam String param) {
         Locale locale = LocaleContextHolder.getLocale();
-        if (exceptionLog.getId() == null) {
-            throw new CommonException(ResultStatus.TEST_ERROR, new String[]{"test"});
-        }
+        ResponseEnum.TEST_ERROR.assertNotNull(exceptionLog.getId(), "test");
         return new OperationLog();
     }
 

@@ -1,7 +1,7 @@
 package com.jhmarryme.demo.config;
 
 import com.jhmarryme.demo.common.base.CommonResult;
-import com.jhmarryme.demo.common.base.exception.CommonException;
+import com.jhmarryme.demo.common.base.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -36,12 +36,12 @@ public class UnifiedExceptionAdvice {
         return CommonResult.failure();
     }
 
-    @ExceptionHandler(CommonException.class)
-    public Object handleCommonException(CommonException e, HttpServletRequest request) {
+    @ExceptionHandler(BaseException.class)
+    public Object handleCommonException(BaseException e, HttpServletRequest request) {
         log.error("统一异常处理(业务异常):" + e);
         Locale locale = localeResolver.resolveLocale(request);
-        String message = messageSource.getMessage(e.getResultStatus().getCode(), e.getParams(), locale);
-        CommonResult<Object> result = CommonResult.failure(e.getResultStatus(), e.getData());
+        String message = messageSource.getMessage(e.getResponseEnum().getCode(), e.getParams(), locale);
+        CommonResult<Object> result = CommonResult.failure(e.getResponseEnum(), e.getData());
         result.setMsg(message);
         return result;
     }
