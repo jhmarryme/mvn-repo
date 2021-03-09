@@ -1,7 +1,7 @@
 package com.jhmarryme.demo.common.base.enums;
 
 
-import com.jhmarryme.demo.common.base.asserts.CommonExceptionAssert;
+import com.jhmarryme.demo.common.base.interfaces.CommonExceptionAssert;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -25,6 +25,8 @@ public enum ResponseEnum implements CommonExceptionAssert {
     NO_AUTHORITY(HttpStatus.FORBIDDEN),
     /** 测试用 */
     TEST_ERROR(HttpStatus.BAD_REQUEST),
+    /** 参数校验错误 */
+    PARAM_VERIFICATION_ERROR(HttpStatus.BAD_REQUEST),
     ;
 
     /** 业务异常码 */

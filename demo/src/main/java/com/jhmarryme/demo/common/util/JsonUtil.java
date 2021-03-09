@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * description: 基于Gson的json工具类
+ * 基于Gson的json工具类
  * @author JiaHao Wang
  * @date 2021/2/27 21:59
  */

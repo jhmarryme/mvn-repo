@@ -1,6 +1,6 @@
 package com.jhmarryme.demo.common.base.exception;
 
-import com.jhmarryme.demo.common.base.IResponseEnum;
+import com.jhmarryme.demo.common.base.interfaces.IResponseEnum;
 import com.jhmarryme.demo.common.base.enums.ResponseEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

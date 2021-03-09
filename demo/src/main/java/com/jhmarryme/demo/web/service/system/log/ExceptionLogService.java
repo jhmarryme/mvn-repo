@@ -18,12 +18,6 @@ public class ExceptionLogService {
     @Autowired
     private ExceptionLogMapper exceptionLogMapper;
 
-    public int insertDemo() {
-        ExceptionLog exceptionLog = new ExceptionLog();
-        exceptionLog.setId(RandomStringUtils.randomAlphanumeric(5));
-        return exceptionLogMapper.insert(exceptionLog);
-    }
-
     public void insertOne(ExceptionLog exceptionLog) {
         exceptionLogMapper.insert(exceptionLog);
     }

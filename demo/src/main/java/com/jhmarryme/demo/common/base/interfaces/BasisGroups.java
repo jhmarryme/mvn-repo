@@ -1,4 +1,4 @@
-package com.jhmarryme.demo.common.base;
+package com.jhmarryme.demo.common.base.interfaces;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;

@@ -1,5 +1,6 @@
 package com.jhmarryme.demo.common.base;
 
+import com.jhmarryme.demo.common.base.interfaces.IResponseEnum;
 import com.jhmarryme.demo.common.base.enums.ResponseEnum;
 import lombok.Data;
 

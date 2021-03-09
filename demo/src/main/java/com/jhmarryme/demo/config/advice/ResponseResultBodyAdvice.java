@@ -1,4 +1,4 @@
-package com.jhmarryme.demo.config;
+package com.jhmarryme.demo.config.advice;
 
 import com.jhmarryme.demo.common.annotation.ResponseResultBody;
 import com.jhmarryme.demo.common.base.CommonResult;
@@ -16,8 +16,8 @@ import java.lang.annotation.Annotation;
 
 /**
  * 全局处理 包装返回结果
- *      使用@ResponseBody注解会把返回Object序列化成JSON字符串,
- *      所以 在序列化前把Object赋值给CommonResult<Object>
+ *      <p>使用@ResponseBody注解会把返回Object序列化成JSON字符串,
+ *      <p>所以 在序列化前把Object赋值给CommonResult<Object>
  * @author JiaHao Wang
  * @date 2021/3/3 10:40
  */
@@ -31,18 +31,18 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
      * 判断类或者方法是否使用了 @ResponseResultBody
      */
     @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ANNOTATION_TYPE) ||
-                returnType.hasMethodAnnotation(ANNOTATION_TYPE);
+    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> converterType) {
+        return AnnotatedElementUtils.hasAnnotation(methodParameter.getContainingClass(), ANNOTATION_TYPE) ||
+                methodParameter.hasMethodAnnotation(ANNOTATION_TYPE);
     }
 
     /**
      * 当类或者方法使用了 @ResponseResultBody 就会调用这个方法
      */
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType,
-                                  MediaType selectedContentType,
-                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
+    public Object beforeBodyWrite(Object body, MethodParameter methodParameter,
+                                  MediaType mediaType,
+                                  Class<? extends HttpMessageConverter<?>> aClass,
                                   ServerHttpRequest request, ServerHttpResponse response) {
         // 防止重复包裹的问题出现
         if (body instanceof CommonResult) {

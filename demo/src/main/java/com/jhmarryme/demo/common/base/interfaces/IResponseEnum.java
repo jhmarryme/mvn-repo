@@ -1,9 +1,9 @@
-package com.jhmarryme.demo.common.base;
+package com.jhmarryme.demo.common.base.interfaces;
 
 import org.springframework.http.HttpStatus;
 
 /**
- * description: 
+ *
  * @author JiaHao Wang
  * @date 2021/3/8 17:23
  */

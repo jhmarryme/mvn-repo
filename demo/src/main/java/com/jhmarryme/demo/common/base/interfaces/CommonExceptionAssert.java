@@ -1,11 +1,10 @@
-package com.jhmarryme.demo.common.base.asserts;
+package com.jhmarryme.demo.common.base.interfaces;
 
-import com.jhmarryme.demo.common.base.IResponseEnum;
 import com.jhmarryme.demo.common.base.exception.BaseException;
 import com.jhmarryme.demo.common.base.exception.CommonException;
 
 /**
- * description: 
+ *
  * @author JiaHao Wang
  * @date 2021/3/8 17:18
  */

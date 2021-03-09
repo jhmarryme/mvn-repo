@@ -1,6 +1,6 @@
 package com.jhmarryme.demo.common.base.exception;
 
-import com.jhmarryme.demo.common.base.IResponseEnum;
+import com.jhmarryme.demo.common.base.interfaces.IResponseEnum;
 
 import java.io.Serial;
 

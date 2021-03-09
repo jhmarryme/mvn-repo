@@ -1,6 +1,6 @@
 package com.jhmarryme.demo.pojo.vo;
 
-import com.jhmarryme.demo.common.base.BasisGroups;
+import com.jhmarryme.demo.common.base.interfaces.BasisGroups;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
