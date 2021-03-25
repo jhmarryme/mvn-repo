@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mybatis-generator" />
+        <module name="mybatis-plus-auto-generator" />
         <module name="common" />
         <module name="demo" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="demo" options="-parameters" />
       <module name="mybatis-generator" options="-parameters" />
       <module name="mybatis-plus-auto-enerator" options="" />
+      <module name="mybatis-plus-auto-generator" options="-parameters" />
     </option>
   </component>
 </project>

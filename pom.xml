@@ -12,6 +12,7 @@
         <module>common</module>
         <module>demo</module>
         <module>mybatis-generator</module>
+        <module>mybatis-plus-auto-generator</module>
     </modules>
 
     <properties>
