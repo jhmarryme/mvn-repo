@@ -12,6 +12,7 @@
       <set>
         <option value="$PROJECT_DIR$/mapper/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis-plus-auto-enerator/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-plus-auto-generator/pom.xml" />
         <option value="$PROJECT_DIR$/pojo/pom.xml" />
       </set>
     </option>
