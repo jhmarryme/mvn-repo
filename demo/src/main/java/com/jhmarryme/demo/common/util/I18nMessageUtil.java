@@ -7,7 +7,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * description: 
+ *
  * @author JiaHao Wang
  * @date 2021/3/10 0:18
  */

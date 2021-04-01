@@ -2,14 +2,13 @@ package com.jhmarryme.demo.config.aspect;
 
 import com.jhmarryme.demo.common.annotation.OperLog;
 import com.jhmarryme.demo.common.util.IPUtil;
-import com.jhmarryme.demo.common.util.JsonUtil;
+import com.jhmarryme.demo.common.util.GsonUtil;
 import com.jhmarryme.demo.pojo.model.system.log.ExceptionLog;
 import com.jhmarryme.demo.pojo.model.system.log.OperationLog;
 import com.jhmarryme.demo.web.service.system.log.ExceptionLogService;
 import com.jhmarryme.demo.web.service.system.log.OperationLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -106,16 +105,16 @@ public class OperationLogAspect {
             // 请求类型
             operlog.setReqType(request.getMethod());
             // 请求体
-            String reqBody = JsonUtil.objectToJson(joinPoint.getArgs());
+            String reqBody = GsonUtil.objectToJson(joinPoint.getArgs());
             operlog.setReqBody(reqBody);
             // 请求的参数
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
-            String params = JsonUtil.objectToJson(rtnMap);
+            String params = GsonUtil.objectToJson(rtnMap);
             // 请求参数
             operlog.setReqParam(params);
             // 返回结果
-            operlog.setResParam(JsonUtil.objectToJson(keys));
+            operlog.setResParam(GsonUtil.objectToJson(keys));
             // 请求用户ID
             //            operlog.setOperUserId(UserShiroUtil.getCurrentUserLoginName());
             // 请求用户名称
@@ -166,12 +165,12 @@ public class OperationLogAspect {
             // 请求类型
             excepLog.setReqType(request.getMethod());
             // 请求体
-            String reqBody = JsonUtil.objectToJson(joinPoint.getArgs());
+            String reqBody = GsonUtil.objectToJson(joinPoint.getArgs());
             excepLog.setReqBody(reqBody);
             // 请求的参数
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
-            String params = JsonUtil.objectToJson(rtnMap);
+            String params = GsonUtil.objectToJson(rtnMap);
             excepLog.setReqParam(params);
             // 请求参数
             excepLog.setMethod(methodName);

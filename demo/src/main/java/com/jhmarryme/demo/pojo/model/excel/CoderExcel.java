@@ -8,10 +8,9 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * description: 
- * @author: JiaHao Wang
- * @date: 1/2/21 12:03 PM
- * @modified By:
+ *
+ * @author JiaHao Wang
+ * @date 1/2/21 12:03 PM
  */
 @Data
 @Builder

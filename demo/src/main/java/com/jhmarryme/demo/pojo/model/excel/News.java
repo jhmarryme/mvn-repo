@@ -9,10 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * description: 节假日api所返回的 当日信息
- * @author: JiaHao Wang
- * @date: 1/3/21 10:22 AM
- * @modified By:
+ * 节假日api所返回的 当日信息
+ * @author JiaHao Wang
+ * @date 1/3/21 10:22 AM
  */
 @Data
 @Builder

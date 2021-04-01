@@ -14,7 +14,7 @@ import java.util.Map;
  * @date 2021/2/27 21:59
  */
 @Slf4j
-public class JsonUtil {
+public class GsonUtil {
 
     private static final Gson GSON;
 

@@ -9,10 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * description: 
- * @author: JiaHao Wang
- * @date: 1/2/21 12:02 PM
- * @modified By:
+ *
+ * @author JiaHao Wang
+ * @date 1/2/21 12:02 PM
  */
 @Data
 @Table(name = "coder")
