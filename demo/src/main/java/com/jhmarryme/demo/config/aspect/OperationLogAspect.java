@@ -1,6 +1,7 @@
 package com.jhmarryme.demo.config.aspect;
 
 import com.jhmarryme.demo.common.annotation.OperLog;
+import com.jhmarryme.demo.common.base.exception.CommonException;
 import com.jhmarryme.demo.common.util.IPUtil;
 import com.jhmarryme.demo.common.util.GsonUtil;
 import com.jhmarryme.demo.pojo.model.system.log.ExceptionLog;
@@ -105,16 +106,16 @@ public class OperationLogAspect {
             // 请求类型
             operlog.setReqType(request.getMethod());
             // 请求体
-            String reqBody = GsonUtil.objectToJson(joinPoint.getArgs());
+            String reqBody = GsonUtil.obj2Json(joinPoint.getArgs()).orElseThrow(CommonException::new);
             operlog.setReqBody(reqBody);
             // 请求的参数
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
-            String params = GsonUtil.objectToJson(rtnMap);
+            String params = GsonUtil.obj2Json(rtnMap).orElseThrow(CommonException::new);
             // 请求参数
             operlog.setReqParam(params);
             // 返回结果
-            operlog.setResParam(GsonUtil.objectToJson(keys));
+            operlog.setResParam(GsonUtil.obj2Json(keys).orElseThrow(CommonException::new));
             // 请求用户ID
             //            operlog.setOperUserId(UserShiroUtil.getCurrentUserLoginName());
             // 请求用户名称
@@ -165,12 +166,12 @@ public class OperationLogAspect {
             // 请求类型
             excepLog.setReqType(request.getMethod());
             // 请求体
-            String reqBody = GsonUtil.objectToJson(joinPoint.getArgs());
+            String reqBody = GsonUtil.obj2Json(joinPoint.getArgs()).orElseThrow(CommonException::new);
             excepLog.setReqBody(reqBody);
             // 请求的参数
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
-            String params = GsonUtil.objectToJson(rtnMap);
+            String params = GsonUtil.obj2Json(rtnMap).orElseThrow(CommonException::new);
             excepLog.setReqParam(params);
             // 请求参数
             excepLog.setMethod(methodName);

@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 基于Gson的json工具类
@@ -25,96 +27,95 @@ public class GsonUtil {
     /**
      * 将对象转为json字符串
      *
-     * @param data
+     * @param obj 需要转化的对象
      * @return java.lang.String
-     * @throws
      */
-    public static String objectToJson(Object data) {
-        String json = null;
+    public static Optional<String> obj2Json(Object obj) {
         try {
-            json = GSON.toJson(data);
+            return Optional.ofNullable(GSON.toJson(obj));
         } catch (Exception e) {
             log.error("序列化对象失败");
         }
-        return json;
+        return Optional.empty();
     }
 
     /**
      * 将指定类型的对象转为json字符串
      *
-     * @param t
-     * @param cls
+     * @param t 需要转换的pojo
+     * @param cls 对象中的object类型
      * @return java.lang.String
      */
-    public static <T> String pojoToJson(T t, Class<T> cls) {
-        String json = null;
+    public static <T> Optional<String> pojo2Json(T t, Class<T> cls) {
         try {
-            json = GSON.toJson(t, cls);
+            return Optional.ofNullable(GSON.toJson(t, cls));
         } catch (Exception e) {
             log.error("序列化对象失败");
         }
-        return json;
+        return Optional.empty();
     }
 
     /**
      * 将json字符串转为指定类型的实例
      *
-     * @param json
-     * @param cls
+     * @param json json数据
+     * @param cls 对象中的object类型
      * @return T
      */
-    public static <T> T jsonToPojo(String json, Class<T> cls) {
-        T t = null;
+    public static <T> Optional<T> jsonToPojo(String json, Class<T> cls) {
         try {
-            t = GSON.fromJson(json, cls);
+            return Optional.ofNullable(GSON.fromJson(json, cls));
         } catch (Exception e) {
             log.error("反序列化对象失败");
         }
-        return t;
+        return Optional.empty();
     }
 
     /**
      * 将json转为指定类型的List
      *
-     * @param json
+     * @param json json数据
      * @return java.util.List<T>
      */
     public static <T> List<T> jsonToList(String json) {
-        List<T> list = null;
         try {
             // Gson的TypeToken来确定要反序列化的正确类型
-            list = GSON.fromJson(json, new TypeToken<List<T>>() {}.getType());
+            return GSON.fromJson(json, new TypeToken<List<T>>() {}.getType());
         } catch (Exception e) {
             log.error("反序列化对象失败");
         }
-        return list;
+        return Lists.newArrayList();
     }
 
-    public static <T> Map<String, T> jsonToMap(String json) {
-        Map<String, T> map = null;
+    /**
+     * 将json转为map
+     *
+     * @param json json数据
+     * @return java.util.Optional<java.lang.Object>
+     */
+    public static <T> Optional<Object> jsonToMap(String json) {
         try {
-            map = GSON.fromJson(json, new TypeToken<Map<String, T>>() {}.getType());
+            return Optional.ofNullable(GSON.fromJson(json, new TypeToken<Map<String, T>>() {}.getType()));
         } catch (Exception e) {
             log.error("反序列化对象失败");
         }
-        return map;
+        return Optional.empty();
     }
 
     /**
      * 将json转为Map List
      *
-     * @param json
+     * @param json json数据
      * @return java.util.List<java.util.Map < java.lang.String, T>>
      */
     public static <T> List<Map<String, T>> jsonToMapList(String json) {
-        List<Map<String, T>> list = null;
         try {
             // Gson的TypeToken来确定要反序列化的正确类型
-            list = GSON.fromJson(json, new TypeToken<List<Map<String, T>>>() {}.getType());
+            return GSON.fromJson(json, new TypeToken<List<Map<String, T>>>() {}.getType());
         } catch (Exception e) {
             log.error("反序列化对象失败");
         }
-        return list;
+        return Lists.newArrayList();
     }
 
 }
