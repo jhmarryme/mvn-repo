@@ -1,8 +1,11 @@
 package com.jhmarryme.demo.config.advice;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhmarryme.demo.common.annotation.ResponseResultBody;
 import com.jhmarryme.demo.common.base.CommonResult;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.MediaType;
@@ -27,6 +30,9 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
 
     private static final Class<? extends Annotation> ANNOTATION_TYPE = ResponseResultBody.class;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     /**
      * 判断类或者方法是否使用了 @ResponseResultBody
      */
@@ -39,6 +45,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
     /**
      * 当类或者方法使用了 @ResponseResultBody 就会调用这个方法
      */
+    @SneakyThrows
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter,
                                   MediaType mediaType,
@@ -47,6 +54,10 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object> {
         // 防止重复包裹的问题出现
         if (body instanceof CommonResult) {
             return body;
+        }
+        // 直接返回string类型有异常
+        if (body instanceof String) {
+            return objectMapper.writeValueAsString(CommonResult.success(body));
         }
         return CommonResult.success(body);
     }
