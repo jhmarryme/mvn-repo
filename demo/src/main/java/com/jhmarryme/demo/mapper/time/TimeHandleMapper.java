@@ -8,5 +8,5 @@ import com.jhmarryme.demo.pojo.model.time.ZoneTime;
  * @author JiaHao Wang
  * @date 2021/6/21 10:49
  */
-public interface TimeHandleDao extends BaseMapper<ZoneTime> {
+public interface TimeHandleMapper extends BaseMapper<ZoneTime> {
 }

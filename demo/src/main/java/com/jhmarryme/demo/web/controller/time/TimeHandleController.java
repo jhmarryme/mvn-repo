@@ -1,7 +1,7 @@
 package com.jhmarryme.demo.web.controller.time;
 
 import com.jhmarryme.demo.common.annotation.ResponseResultBody;
-import com.jhmarryme.demo.mapper.time.TimeHandleDao;
+import com.jhmarryme.demo.mapper.time.TimeHandleMapper;
 import com.jhmarryme.demo.pojo.model.time.ZoneTime;
 import com.jhmarryme.demo.pojo.vo.time.TimeHandleReqVo;
 import com.jhmarryme.demo.pojo.vo.time.TimeReceiveReqVO;
@@ -23,7 +23,7 @@ import java.util.Date;
 public class TimeHandleController {
 
     @Autowired
-    private TimeHandleDao timeHandleDao;
+    private TimeHandleMapper timeHandleMapper;
 
     @RequestMapping(path = "/handle", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseResultBody
@@ -33,9 +33,9 @@ public class TimeHandleController {
                 .createdAt(Date.from(timeHandleReqVo.getCreatedAtInLocalDateTime().atZone(ZoneId.systemDefault()).toInstant()))
                 .updatedAt(timeHandleReqVo.getUpdatedAt())
                 .build();
-        timeHandleDao.insert(zoneTime);
+        timeHandleMapper.insert(zoneTime);
 
-        ZoneTime zoneTimeInDb = timeHandleDao.selectByPrimaryKey(zoneTime.getId());
+        ZoneTime zoneTimeInDb = timeHandleMapper.selectByPrimaryKey(zoneTime.getId());
 
         return zoneTimeInDb;
     }
