@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * 通用异常类
+ * 基础异常类
  * @author Jiahao Wang
  * @date 2021/3/3 11:03
  */

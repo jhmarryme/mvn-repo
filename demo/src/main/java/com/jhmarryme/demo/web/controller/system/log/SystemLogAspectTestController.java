@@ -23,5 +23,4 @@ public class SystemLogAspectTestController {
         return new OperationLog();
     }
 
-
 }

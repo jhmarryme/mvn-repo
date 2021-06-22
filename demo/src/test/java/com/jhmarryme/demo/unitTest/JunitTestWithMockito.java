@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  */
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class JunitTestBasic {
+public class JunitTestWithMockito {
 
     @Autowired
     private UserController userController;
