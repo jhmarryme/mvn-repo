@@ -5,7 +5,7 @@ import com.jhmarryme.demo.common.base.interfaces.IResponseEnum;
 import java.io.Serial;
 
 /**
- *
+ * 通用异常类
  * @author JiaHao Wang
  * @date 3/9/21 1:57 AM
  */

@@ -54,6 +54,7 @@ public class UnifiedExceptionAdvice {
     }
 
     private CommonResult<Object> buildResult(IResponseEnum responseEnum, Object data, String... params) {
+        // 国际化
         String msg = I18nMessageUtil.getMsg(responseEnum.getCode(), params);
         CommonResult<Object> result = CommonResult.failure(responseEnum, data);
         result.setMsg(msg);
